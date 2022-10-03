@@ -5,6 +5,7 @@ from pydub.playback import play
 import PyPDF2 as ppdf
 import random 
 import json
+from time import sleep
 from threading import Thread
 
 
@@ -19,6 +20,9 @@ def clear():
 
 clear()
 ################# INITIALISE CONFIG #################
+textInput = ''
+
+
 speed = 0
 lang = ''
 slow = False
@@ -45,7 +49,7 @@ with open("./data.json", "r") as f:
         entry = data[f"{entryNum}"]
         text = entry["text"]
         title = entry["title"]
-        print(text)
+        # print(text)
    
 
 
@@ -68,12 +72,30 @@ class SPEECH(Thread):
     def run(self):
         filesInPath = os.listdir('./audios/')
         for i in range(len(filesInPath)):
+            sleep(speed)
             sound = AudioSegment.from_mp3(f"./audios/{i}.mp3")   
             play(sound)
 
 class INPUT(Thread):
     def run(self):
-        print(input("> "))
+        clear()
+        textInput = input("> ")
+        checkInput(text ,textInput)
+
+def checkInput(text, input):
+    text = text.split()
+    mark = 0
+    total = len(text)
+    textInput = input
+    textInput = textInput.split()
+    for i, word in enumerate(textInput):
+        
+        if text[i] == word:
+            mark +=1
+        else:
+            pass
+    print(f"{mark}/{total}")
+                
 
 
 
@@ -81,5 +103,7 @@ class INPUT(Thread):
 # textToSpeech(text)
 np = INPUT()
 sp = SPEECH()
-np.start()
+
 sp.start()
+np.start()
+
