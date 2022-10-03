@@ -12,8 +12,12 @@ from threading import Thread
 if not os.path.exists('./audios/'):
     os.makedirs('./audios/')
 
+def clear():
+    os.system("clear")
+#    os.system("cls")              IF ON WINDOWS UNCOMMENT THIS LINE AD COMMENT LINE ABOVE 
 
-os.system("clear")
+
+clear()
 ################# INITIALISE CONFIG #################
 speed = 0
 lang = ''
@@ -49,7 +53,7 @@ with open("./data.json", "r") as f:
 ################## LOGIC ############################
 
 def textToSpeech(text):
-    os.system("clear")
+    clear()
     print('Turning paragraph into audio... Might take a minute.')
     fileNum = 0
     textedit = text.split(" ")
@@ -69,7 +73,7 @@ class SPEECH(Thread):
 
 class INPUT(Thread):
     def run(self):
-        print(input(">:"))
+        print(input("> "))
 
 
 

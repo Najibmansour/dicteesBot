@@ -33,13 +33,14 @@ def getInfo(file):
         f.close()
     return [ titles, texts ]
 
-# with open('./data.json', 'w') as f:
-#     a = json.dumps(data, indent=4)
-#     json.dump(data, f)
-#     f.close()
+
+def clear():
+    os.system('clear') 
+    #os.system('cls')                   IF ON WINDOWS COMENT LINE ABOVE AND UNCOMMENT THIS LINE
+
 
 def main():
-    os.system('clear')
+    clear()
     option = input("Do you want to add or delete entry?[add/del]: ")
     if option == 'add' or option == 'del':
         if option == "del":
